@@ -1,0 +1,26 @@
+apiVersion: "extensions/v1beta1"
+kind: "Deployment"
+metadata:
+  name: grinder-agent
+  labels:
+    name: grinder-agent
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: grinder-agent
+  template:
+    metadata:
+      labels:
+        app: grinder-agent
+    spec:
+      containers:
+        - name: grinder-agent
+          image: grinder:3.11
+          env:
+            - name: GRINDER_MODE
+              value: agent
+            - name: GRINDER_CONSOLE_HOST
+              value: grinder-console
+            - name: TARGET_HOST
+              value: http://localhost:8080
