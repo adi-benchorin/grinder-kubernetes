@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: grinder-console
+  labels:
+    app: grinder-console
+spec:
+  ports:
+    - port: 6372
+      targetPort: grinder-c1
+      protocol: TCP
+      name: grinder-console
+    - port: 6373
+      targetPort: grinder-r1
+      protocol: TCP
+      name: grinder-rest
+  selector:
+    app: grinder-console
+  type: LoadBalancer

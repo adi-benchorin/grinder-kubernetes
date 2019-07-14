@@ -1,0 +1,29 @@
+apiVersion: "extensions/v1beta1"
+kind: "Deployment"
+metadata:
+  name: grinder-console
+  labels:
+    name: grinder-console
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grinder-console
+  template:
+    metadata:
+      labels:
+        app: grinder-console
+    spec:
+      containers:
+        - name: grinder-console
+          image: grinder:3.11
+          env:
+            - name: GRINDER_MODE
+              value: console
+          ports:
+            - name: grinder-c1
+              containerPort: 6372
+              protocol: TCP
+            - name: grinder-r1
+              containerPort: 6373
+              protocol: TCP
